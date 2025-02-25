@@ -1,0 +1,23 @@
+{
+  "name": "hexlet-fastify",
+  "version": "1.0.0",
+  "description": "*** MY FIRST FASTIFY PROJECT ***",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/http87/hexlet-fastify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/http87/hexlet-fastify/issues"
+  },
+  "homepage": "https://github.com/http87/hexlet-fastify#readme",
+  "dependencies": {
+    "fastify": "^5.2.1"
+  }
+}
