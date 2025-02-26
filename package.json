@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/http87/hexlet-fastify#readme",
   "dependencies": {
-    "fastify": "^5.2.1"
+    "@faker-js/faker": "^9.5.0",
+    "@fastify/view": "^10.0.2",
+    "fastify": "^5.2.1",
+    "pug": "^3.0.3"
   }
 }

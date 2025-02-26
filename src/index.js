@@ -1,33 +1,39 @@
 import fastify from 'fastify';
+import view from '@fastify/view';
+import pug from 'pug';
+import getUsers from '../src/users.js';
+import { getDateNow } from './my-func/get-date.js';
 
 const app = fastify();
 const port = 3000;
 
-const state = {
-  users: [
-    {
-      id: 1,
-      post: 'pilot',
-    },
-    {
-      id: 2,
-      post: 'teacher',
-    }
-  ]
-}
+const users = getUsers();
+const dateNow = getDateNow();
 
-app.get('/user/:id/post/:postId', (req, res) => {
-  const { id, postId } = req.params;
-  const user = state.users.find((user) => {
-    if (user.id === parseInt(id) && user.post === postId) {
-      return user.id;
-    }
-  });
+// Подключаем pug через плагин
+await app.register(view, { engine: { pug } });
+
+app.get('/users', (req, res) => {
+  const data = {
+    users,
+    dateNow,
+  };
+  res.view('src/views/users/show', data);
+});
+
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const user = users.find((user) => user.id === id);
+
   if (!user) {
-    res.code(404).send({ message: 'User not found' });
-  } else {
-    res.send(user);
+    res.code(404).send('User not found');
+    return;
   }
+  const data = {
+    user,
+    dateNow,
+  };
+  res.view('src/views/users/index', data);
 });
 
 app.listen({ port }, () => {
