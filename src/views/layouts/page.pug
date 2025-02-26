@@ -1,10 +1,19 @@
-html 
-  head 
-    meta(charset='utf-8')
-    meta(name='viewport', content='with=device-width, initial-scale=1')
-  body 
-    p 
-      a(href='/courses')
-      block content 
+html
+  head
+    link(href="/assets/bootstrap.min.css", rel="stylesheet")
+    title My Site
 
-      block footer 
+  body
+    .container.wrapper.flex-grow-1
+      block header
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          div.collapse.navbar-collapse
+            li.nav-item.active
+              a(href='/') Главная
+            li.nav-item
+              a(href='/users') Пользователи
+      block content
+      block foot
+        #footer.text-center.text-lg-start.bg-light.text-muted
+          div.text-center.p-4
+            a(href='https://github.com/') My github

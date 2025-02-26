@@ -1,35 +1,5 @@
-//- src/views/users/show.pug
 extends ../layouts/page.pug
 
 block content
-    style.
-      table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th, td {
-        padding: 4px;
-        text-align: left;
-      }
-
-
-    if users.length === 0
-      p Пока не добавлено ни одного пользователя
-    else 
-      table
-        thead
-          tr 
-            th id
-            th name 
-            th email
-        tbody
-        each user in users
-          tr
-            td= user.id
-            td
-              - var url = `/users/${user.id}`;
-              a(href= url)= user.username
-            td= user.email
-
-block footer 
-  p= dateNow
+  h2 #{user.username}
+  div #{user.email}

@@ -1,6 +1,7 @@
 import fastify from 'fastify';
 import view from '@fastify/view';
 import pug from 'pug';
+import fastifyStatic from '@fastify/static';
 import getUsers from '../src/users.js';
 import { getDateNow } from './my-func/get-date.js';
 
@@ -13,12 +14,19 @@ const dateNow = getDateNow();
 // Подключаем pug через плагин
 await app.register(view, { engine: { pug } });
 
+app.register(fastifyStatic, {
+  root: '/node_modules/bootstrap/dist/css',
+  prefix: '/assets/',
+});
+
+app.get('/', (req, res) => res.view('src/views/index'));
+
 app.get('/users', (req, res) => {
   const data = {
     users,
     dateNow,
   };
-  res.view('src/views/users/show', data);
+  res.view('src/views/users/index', data);
 });
 
 app.get('/users/:id', (req, res) => {
@@ -33,7 +41,7 @@ app.get('/users/:id', (req, res) => {
     user,
     dateNow,
   };
-  res.view('src/views/users/index', data);
+  res.view('src/views/users/show', data);
 });
 
 app.listen({ port }, () => {
