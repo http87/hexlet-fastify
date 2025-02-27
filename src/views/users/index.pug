@@ -1,14 +1,16 @@
 extends ../layouts/page.pug
 
 block content
+  form.input-group(role = 'form' method = 'GET' action = '/users')
+    input.form-control.rounded(type = 'search', name = 'term', value = term)
+    input.btn.btn-outline-primary(type = 'submit' value = 'search')
+
   table.table.table-striped
     tr
-      th Идентификатор пользователя
       th Имя пользователя
       th Емейл пользователя
-    each user, index in users
+    each user in users
       tr
         td
-          a(href='/users/' + user.id) #{user.id}
-        td= user.username
+          a(href='/users/' + user.name) #{user.name}
         td= user.email

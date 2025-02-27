@@ -7,8 +7,8 @@ const createRandomUser = () => ({
 });
 
 export default () => {
-  faker.seed(123);
+  faker.seed(5);
   return faker.helpers.multiple(createRandomUser, {
-    count: 100,
+    count: 5,
   });
 };

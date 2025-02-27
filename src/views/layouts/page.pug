@@ -6,12 +6,13 @@ html
   body
     .container.wrapper.flex-grow-1
       block header
-        nav.navbar.navbar-expand-lg.navbar-light.bg-light
-          div.collapse.navbar-collapse
-            li.nav-item.active
-              a(href='/') Главная
-            li.nav-item
-              a(href='/users') Пользователи
+        ul.nav 
+          li.nav-item 
+            a.nav-link.active(aria-curent="page" href='/') Главная
+          li.nav-item 
+            a.nav-link(aria-curent="page" href='/users') Пользователи
+          li.nav-item 
+            a.nav-link(aria-curent="page" href='/users/new') Добавить
       block content
       block foot
         #footer.text-center.text-lg-start.bg-light.text-muted
