@@ -10,11 +10,15 @@ html
           li.nav-item 
             a.nav-link.active(aria-curent="page" href='/') Главная
           li.nav-item 
-            a.nav-link(aria-curent="page" href='/users') Пользователи
+            a.nav-link(aria-curent="page" href=route('users')) Пользователи
           li.nav-item 
-            a.nav-link(aria-curent="page" href='/users/new') Добавить
+            a.nav-link(aria-curent="page" href=route('newUser')) Добавить пользователя
+          li.nav-item 
+            a.nav-link(aria-curent="page" href=route('posts')) Посты
+          li.nav-item 
+            a.nav-link(aria-curent="page" href=route('newPost')) Добавить пост
       block content
       block foot
         #footer.text-center.text-lg-start.bg-light.text-muted
           div.text-center.p-4
-            a(href='https://github.com/') My github
+            a(href='https://github.com/') My github / #{dateNow}

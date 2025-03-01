@@ -1,0 +1,15 @@
+extends ../layouts/page.pug 
+
+block content
+  if error
+    p= error.message 
+
+  form(action=route('posts'), method="post")
+    div
+      label Название:
+        input.form-control(type="text", name="title", value=title, required=true)
+    div
+      label Описание:
+        textarea.form-control(name="body", required=true) #{body}
+    div
+      input.btn.btn-primary(type="submit", value="Сохранить")

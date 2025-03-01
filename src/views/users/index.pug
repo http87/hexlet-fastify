@@ -1,7 +1,7 @@
 extends ../layouts/page.pug
 
 block content
-  form.input-group(role = 'form' method = 'GET' action = '/users')
+  form.input-group(role = 'form' method = 'GET' action = route('users'))
     input.form-control.rounded(type = 'search', name = 'term', value = term)
     input.btn.btn-outline-primary(type = 'submit' value = 'search')
 
@@ -9,8 +9,8 @@ block content
     tr
       th Имя пользователя
       th Емейл пользователя
-    each user in users
+    each user, index in users
       tr
         td
-          a(href='/users/' + user.name) #{user.name}
+          a(href=route('user', { id: user.id })) #{user.name}
         td= user.email

@@ -1,0 +1,23 @@
+extends ../layouts/page.pug
+
+
+block content
+  div.mx-auto.p-4.py-md-5
+  main
+    table.table.table-striped
+      each post, index in posts
+        tr
+          td
+            a(href='/posts/' + post.id) #{post.title}
+
+  nav
+    ul.pagination
+      li.page-item
+        a.page-link(href='/posts?page=' + previousPage aria-label="Previous")
+          span(aria-hidden="true") &laquo;
+      li.page-item
+        a.page-link(href='/posts?page=' + page)
+          span(aria-hidden="true") #{page}
+      li.page-item
+        a.page-link(href='/posts?page=' + nextPage aria-label="Next")
+          span(aria-hidden="true") &raquo;
