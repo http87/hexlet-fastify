@@ -2,4 +2,8 @@ extends layouts/page.pug
 
 
 block content
-  h1 Welcome to Hexlet
+  main
+    h1 Welcome to Hexlet
+
+    if !visited
+      | Это сообщение показывается только один раз

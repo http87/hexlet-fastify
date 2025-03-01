@@ -5,7 +5,10 @@ import view from '@fastify/view';
 import pug from 'pug';
 import fastifyStatic from '@fastify/static';
 import formbody from '@fastify/formbody';
-import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
+import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes'; // именование маршрутов
+import middie from '@fastify/middie'; // Middleware
+import morgan from 'morgan'; // логирования запросов
+import fastifyCookie from '@fastify/cookie'; // Для работы с куками в Fastify
 import { getDateNow } from './utils.js';
 
 import addRoutes from './routes/index.js';
@@ -16,9 +19,16 @@ export default async () => {
   
   const app = fastify({ exposeHeadRoutes: false });
   
+  const logger = morgan('combined');
+
+  // подключаем middleware
+  await app.register(middie);
+  app.use(logger);
   // подключаем библиотеку для именования маршрутов
   await app.register(fastifyReverseRoutes);
-  
+
+  await app.register(fastifyCookie);
+
   const route = (name, placeholdersValue) => app.reverse(name, placeholdersValue);
   
   const dateNow = getDateNow();
@@ -40,7 +50,19 @@ export default async () => {
     prefix: '/assets/',
   });
 
-  app.get('/', { name: 'home' }, (req, res) => res.view('src/views/index'));
+  app.get('/', { name: 'home' }, (req, res) => {
+    const visited = req.cookies.visited;
+    const templateData = {
+      visited,
+    };
+    res.cookie('visited', true);
+
+    res.view('src/views/index', templateData);
+  });
+
+  // app.use((req, res) => {
+  //   res.end('Hello from meddleware!');
+  // });
 
   addRoutes(app);
 
